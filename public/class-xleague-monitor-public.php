@@ -100,7 +100,9 @@ class Xleague_Monitor_Public
 
 		// wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/xleague-monitor-public.js', array('jquery'), $this->version, false);
 
-		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/custom-firebase.js', array('jquery', 'firebase_app', 'firebase_auth', 'firebase_database', 'firebase_firestore', 'firebase'), $this->version, false);
+		wp_enqueue_script('moment','https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js', array(), $this->version, false);
+
+		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/custom-firebase.js', array('jquery', 'moment', 'firebase_app', 'firebase_auth', 'firebase_database', 'firebase_firestore', 'firebase'), $this->version, false);
 	}
 
 	function custom_firebase_func($atts)
