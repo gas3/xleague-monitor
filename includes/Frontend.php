@@ -7,7 +7,7 @@ namespace App;
 class Frontend {
 
     public function __construct() {
-        add_shortcode( 'vue-app', [ $this, 'render_frontend' ] );
+        add_shortcode( 'xleague-users-table', [ $this, 'render_frontend' ] );
     }
 
     /**

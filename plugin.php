@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Vue Starter Plugin
+Plugin Name: xLeague Monitor
 Plugin URI: https://example.com/
 Description: A WordPress Vue.js starter plugin
 Version: 0.1
