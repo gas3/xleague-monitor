@@ -21,7 +21,7 @@ class Frontend {
     public function render_frontend( $atts, $content = '' ) {
         wp_enqueue_style( 'baseplugin-frontend' );
         wp_enqueue_script( 'baseplugin-frontend' );
-        wp_enqueue_style('bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
+        // wp_enqueue_style('bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
 
         $content .= '<div id="vue-frontend-app"></div>';
 

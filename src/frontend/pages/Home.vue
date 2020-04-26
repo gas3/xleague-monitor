@@ -7,14 +7,12 @@
       :options="options"
       @row-click="onRowClick"
     >
-      
       <template slot="country" slot-scope="props">
-        <img style="width:50px;height:50px;" :src="props.row.country" alt="" />
+        <img style="width:50px;height:50px;" :src="props.row.country" alt />
       </template>
       <template slot="avatar" slot-scope="props">
-        <img style="width:50px;height:50px;" :src="props.row.avatar" alt="" />
+        <img style="width:50px;height:50px;" :src="props.row.avatar" alt />
       </template>
-
     </v-client-table>
   </div>
 </template>
@@ -31,19 +29,56 @@ export default {
       games: [],
       // tableData: [],
 
-      columns: ["country", "avatar", "screenName", "playerId", "platform", "dateFirstAppeared", "qtyGames", "qtyRefferals"],
+      columns: [
+        "country",
+        "avatar",
+        "screenName",
+        "playerId",
+        "platform",
+        "dateFirstAppeared",
+        "dateLastAppeared",
+        "qtyGames",
+        "qtyRefferals"
+      ],
       options: {
         filterByColumn: true,
-        filterable: ["screenName", "playerId", "platform", "dateFirstAppeared", "qtyGames", "qtyRefferals"],
+        filterable: [
+          "screenName",
+          "playerId",
+          "platform",
+          "dateFirstAppeared",
+          "dateLastAppeared",
+          "qtyGames",
+          "qtyRefferals"
+        ],
+
+        dateColumns: ["dateFirstAppeared"],
+        dateFormat: "DD/MM/YYYY HH:mm:ss",
+        // toMomentFormat: true,
+
+        datepickerOptions: { //See http://www.daterangepicker.com/#options
+            showDropdowns: true,
+            autoUpdateInput: true,
+        },
+
 
         listColumns: {
           platform: [
             { id: "Android", text: "Android" },
-            { id: "iPhone", text: "iPhone" },
+            { id: "iPhone", text: "iPhone" }
             // { id: "unknow", text: "Unknown", hide: true }
           ]
         },
-        sortable: ["country", "screenName", "playerId", "platform", "dateFirstAppeared", "qtyGames", "qtyRefferals"],
+        sortable: [
+          "country",
+          "screenName",
+          "playerId",
+          "platform",
+          "dateFirstAppeared",
+          "dateLastAppeared",
+          "qtyGames",
+          "qtyRefferals"
+        ],
         headings: {
           country: "Country",
           avatar: "Avatar",
@@ -51,8 +86,9 @@ export default {
           playerId: "Player ID",
           platform: "Platform",
           dateFirstAppeared: "Date First Appeared",
+          dateLastAppeared: "Date Last Appeared",
           qtyGames: "Qty of Games",
-          qtyRefferals: "Qty of Referrals",
+          qtyRefferals: "Qty of Referrals"
         },
 
         pagination: {
@@ -92,11 +128,10 @@ export default {
           screenName: user.DisplayName,
           playerId: id,
           platform: platform,
-          dateFirstAppeared: user.Timestamp,
+          dateFirstAppeared: moment(user.timeStamp),
+          dateLastAppeared: "",
           qtyGames: qtyGames,
-          qtyRefferals: 0,
-          detail:
-            '<button class="btn-detail" @click="showDetail()">...</button>'
+          qtyRefferals: 0
         });
 
         // console.log(user);
@@ -137,6 +172,18 @@ export default {
 </script>
 
 <style scoped>
+@import '../../../node_modules/daterangepicker/daterangepicker.css';
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
+/* @import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'; */
+
+.VueTables__date-filter {
+  border: 1px solid #ccc;
+  padding: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
 #users-table {
   background: white;
   padding: 20px;
@@ -145,4 +192,13 @@ export default {
 #users-table >>> input:focus {
   color: black;
 }
+
+</style>
+
+<style>
+
+.daterangepicker select{
+  background-color: white !important;
+}
+
 </style>
