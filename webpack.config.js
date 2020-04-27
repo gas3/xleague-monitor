@@ -72,7 +72,8 @@ module.exports = {
         modules: [
             path.resolve('./node_modules'),
             path.resolve(path.join(__dirname, 'src/')),
-        ]
+        ],
+        // extensions: ['*', '.js', '.vue', '.json']
     },
 
     optimization: {

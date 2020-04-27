@@ -13,7 +13,15 @@
       <template slot="avatar" slot-scope="props">
         <img style="width:50px;height:50px;" :src="props.row.avatar" alt />
       </template>
+      <template slot="qtyGames" slot-scope="props">
+        <a @click="onQtyGamesClick(props)">{{ props.row.qtyGames }}</a>
+      </template>
+      <template slot="qtyRefferals" slot-scope="props">
+        <a @click="onQtyRefferalsClick">{{ props.row.qtyRefferals }}</a>
+      </template>
     </v-client-table>
+
+    <v-dialog />
   </div>
 </template>
 
@@ -56,11 +64,11 @@ export default {
         dateFormat: "DD/MM/YYYY HH:mm:ss",
         // toMomentFormat: true,
 
-        datepickerOptions: { //See http://www.daterangepicker.com/#options
-            showDropdowns: true,
-            autoUpdateInput: true,
+        datepickerOptions: {
+          //See http://www.daterangepicker.com/#options
+          showDropdowns: true,
+          autoUpdateInput: true
         },
-
 
         listColumns: {
           platform: [
@@ -128,7 +136,7 @@ export default {
           screenName: user.DisplayName,
           playerId: id,
           platform: platform,
-          dateFirstAppeared: moment(user.timeStamp),
+          dateFirstAppeared: moment(user.Timestamp),
           dateLastAppeared: "",
           qtyGames: qtyGames,
           qtyRefferals: 0
@@ -165,6 +173,42 @@ export default {
 
   methods: {
     onRowClick(e) {
+      // console.log(e);
+      // debugger;
+    },
+    onQtyGamesClick(props) {
+      const userGames = this.games.filter(item => {
+        return item["PlayerID"] == props.row.playerId;
+      });
+
+      console.log(userGames)
+
+      this.$router.push({
+        name: 'GameDetail',
+        params: {
+          games: userGames
+        },
+        hash: '#users-table'
+      })
+
+      // const content = JSON.stringify(game).replace("{","").replace("}","").replace(",","<br>")
+      // const content = (
+      //   <template v-for="(value, name) in game">
+      //     {{ name }}: {{ value }}
+      //   </template>
+      // );
+
+      // let content = "";
+      // for (let key in game) {
+      //   content += `<p>${key} : ${game[key]}</p>`;
+      // }
+
+      // this.$modal.show("dialog", {
+      //   title: "Game Details",
+      //   text: content
+      // });
+    },
+    onQtyRefferalsClick(e) {
       console.log(e);
     }
   }
@@ -172,9 +216,8 @@ export default {
 </script>
 
 <style scoped>
-@import '../../../node_modules/daterangepicker/daterangepicker.css';
-@import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
-/* @import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'; */
+@import "../../../node_modules/daterangepicker/daterangepicker.css";
+@import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css");
 
 .VueTables__date-filter {
   border: 1px solid #ccc;
@@ -182,7 +225,6 @@ export default {
   border-radius: 4px;
   cursor: pointer;
 }
-
 
 #users-table {
   background: white;
@@ -193,12 +235,23 @@ export default {
   color: black;
 }
 
+a {
+  display: block;
+  text-align: center;
+  padding: 10px;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+#users-table >>> td {
+  text-align: center !important;
+}
 </style>
 
 <style>
-
-.daterangepicker select{
+.daterangepicker select {
   background-color: white !important;
 }
-
 </style>
