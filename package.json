@@ -11,7 +11,7 @@
         "build": "webpack -p --mode production"
     },
     "dependencies": {
-        "axios": "^0.19.2",
+        "axios": "^0.21.1",
         "bootstrap": "^4.4.1",
         "bootstrap-vue": "^2.12.0",
         "daterangepicker": "^3.0.5",
