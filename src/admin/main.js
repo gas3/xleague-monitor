@@ -4,6 +4,7 @@ import router from './router'
 import menuFix from './utils/admin-menu-fix'
 
 Vue.config.productionTip = 0
+Vue.config.productionTip = true
 
 /* eslint-disable no-new */
 new Vue({
