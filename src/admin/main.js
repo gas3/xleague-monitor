@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import menuFix from './utils/admin-menu-fix'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = 0
 
 /* eslint-disable no-new */
 new Vue({
